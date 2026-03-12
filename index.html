@@ -498,7 +498,7 @@ textarea::placeholder, input::placeholder { color: var(--muted); }
         </div>
         <div>
           <p class="field-label">Teléfono</p>
-          <input type="tel" id="phone" placeholder="Para coordinar" oninput="checkForm()">
+          <input type="tel" id="phone" placeholder="Para coordinar" maxlength="9" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,9); checkForm()">
         </div>
       </div>
     </div>
@@ -553,11 +553,11 @@ function useChip(el, text) {
 }
 
 function checkForm() {
-  const ok = desc.value.trim().length > 8
-          && pickup.value.trim().length > 2
-          && delivery.value.trim().length > 2
-          && name.value.trim().length > 1
-          && phone.value.trim().length > 5;
+  const ok = document.getElementById('desc').value.trim().length > 2
+          && document.getElementById('pickup').value.trim().length > 1
+          && document.getElementById('delivery').value.trim().length > 1
+          && document.getElementById('name').value.trim().length > 1
+          && document.getElementById('phone').value.trim().length === 9;
   document.getElementById('submitBtn').disabled = !ok;
 }
 
